@@ -37,3 +37,22 @@ async def get_future_bookings(session: AsyncSession, client_id: int) -> list[Boo
 async def get_all_services(session: AsyncSession) -> list[Service]:
     q = select(Service).order_by(Service.id)
     return list((await session.execute(q)).scalars().all())
+
+
+async def get_clients_with_stats(session: AsyncSession) -> list[tuple]:
+    from sqlalchemy import func
+
+    q = (
+        select(
+            User.id,
+            User.name,
+            User.tg_id,
+            User.phone,
+            User.created_at,
+            func.count(Booking.id).label("bookings_count"),
+        )
+        .outerjoin(Booking, Booking.client_id == User.id)
+        .group_by(User.id)
+        .order_by(User.id)
+    )
+    return list((await session.execute(q)).all())

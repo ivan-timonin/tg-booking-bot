@@ -1,16 +1,18 @@
+import csv
+import io
 from datetime import datetime, time, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 from aiogram import F, Router
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import BufferedInputFile, CallbackQuery, Message
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
 from app.database.models import Booking, BotSettings, Service, User
-from app.database.repo import get_all_services
+from app.database.repo import get_all_services, get_clients_with_stats
 from app.keyboards.client_kb import main_menu
 from app.keyboards.master_kb import confirm_delete_kb, master_menu, services_admin_kb
 from app.states import AddService, EditHours
@@ -34,6 +36,39 @@ async def cmd_admin(msg: Message):
     if not _is_master(msg.from_user.id):
         return
     await msg.answer("Панель мастера:", reply_markup=master_menu())
+
+
+@router.message(Command("export"))
+async def export_clients(msg: Message, session: AsyncSession):
+    if not _is_master(msg.from_user.id):
+        return
+
+    clients = await get_clients_with_stats(session)
+    if not clients:
+        await msg.answer("Клиентов пока нет.")
+        return
+
+    output = io.StringIO()
+    writer = csv.writer(output, delimiter=";")
+    writer.writerow(["id", "Имя", "Telegram ID", "Телефон", "Дата регистрации", "Записей"])
+    for row in clients:
+        cid, name, tg_id, phone, created_at, cnt = row
+        writer.writerow([
+            cid,
+            name or "",
+            tg_id,
+            phone or "",
+            created_at.strftime("%d.%m.%Y") if created_at else "",
+            cnt,
+        ])
+
+    csv_bytes = output.getvalue().encode("utf-8-sig")
+    file = BufferedInputFile(csv_bytes, filename="clients.csv")
+
+    await msg.answer_document(
+        file,
+        caption=f"Клиентов: <b>{len(clients)}</b>\nФайл откройте в Excel.",
+    )
 
 
 @router.message(F.text == "Сегодня")
