@@ -40,6 +40,7 @@ class Booking(Base):
     status: Mapped[str] = mapped_column(String(16), default="active")
     reminded_24h: Mapped[bool] = mapped_column(Boolean, default=False)
     reminded_2h: Mapped[bool] = mapped_column(Boolean, default=False)
+    review_requested: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
 
@@ -50,3 +51,15 @@ class BotSettings(Base):
     work_start: Mapped[int] = mapped_column(Integer, default=10)
     work_end: Mapped[int] = mapped_column(Integer, default=20)
     slot_step_min: Mapped[int] = mapped_column(Integer, default=60)
+
+
+class Review(Base):
+    __tablename__ = "reviews"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    booking_id: Mapped[int] = mapped_column(ForeignKey("bookings.id"), unique=True)
+    client_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    service_id: Mapped[int] = mapped_column(ForeignKey("services.id"))
+    rating: Mapped[int] = mapped_column(Integer)
+    comment: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)

@@ -5,6 +5,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.types import BotCommand
+from sqlalchemy import text
 
 from app.config import settings
 from app.database.engine import SessionLocal, engine
@@ -17,6 +18,15 @@ from app.services.scheduler import start_scheduler
 async def init_db():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+
+    async with engine.begin() as conn:
+        try:
+            await conn.execute(text(
+                "ALTER TABLE bookings ADD COLUMN review_requested BOOLEAN DEFAULT 0"
+            ))
+        except Exception:
+            pass
+
     async with SessionLocal() as session:
         if await session.get(BotSettings, 1) is None:
             session.add(BotSettings(id=1))

@@ -10,3 +10,13 @@ class AddService(StatesGroup):
 class EditHours(StatesGroup):
     start = State()
     end = State()
+
+
+class EditService(StatesGroup):
+    name = State()
+    price = State()
+    duration = State()
+
+
+class LeaveComment(StatesGroup):
+    waiting = State()
