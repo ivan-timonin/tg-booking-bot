@@ -32,3 +32,8 @@ async def get_future_bookings(session: AsyncSession, client_id: int) -> list[Boo
         .order_by(Booking.start_at)
     )
     return list((await session.execute(q)).scalars().all())
+
+
+async def get_all_services(session: AsyncSession) -> list[Service]:
+    q = select(Service).order_by(Service.id)
+    return list((await session.execute(q)).scalars().all())
