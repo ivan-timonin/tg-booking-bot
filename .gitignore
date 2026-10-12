@@ -7,3 +7,5 @@ data/
 *.db
 .idea/
 .vscode/
+get_id.py
+manage_services.py
