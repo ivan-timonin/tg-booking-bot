@@ -1,4 +1,4 @@
-\# TG Booking Bot
+# TG Booking Bot
 
 
 
@@ -8,23 +8,23 @@ Telegram bot for client booking with a mini-CRM for the master.
 
 
 
-\[!\[Python](https://img.shields.io/badge/Python-3.12-blue)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.12-blue)](https://www.python.org/)
 
-\[!\[aiogram](https://img.shields.io/badge/aiogram-3.x-green)](https://docs.aiogram.dev/)
+[![aiogram](https://img.shields.io/badge/aiogram-3.x-green)](https://docs.aiogram.dev/)
 
-\[!\[License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-
-
-\---
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 
 
-\## Русский
+---
 
 
 
-\### Что это
+## Русский
+
+
+
+### Что это
 
 
 
@@ -38,59 +38,59 @@ TG Booking Bot — лёгкий Telegram-бот для мастеров сфер
 
 
 
-\### Возможности
+### Возможности
 
 
 
 Для клиента:
 
-\- Запись на услугу: выбор услуги, даты, времени, подтверждение
+- Запись на услугу: выбор услуги, даты, времени, подтверждение
 
-\- Просмотр и отмена своих записей
+- Просмотр и отмена своих записей
 
-\- Автонапоминания за 24 часа и за 2 часа до визита
+- Автонапоминания за 24 часа и за 2 часа до визита
 
 
 
 Для мастера:
 
-\- Расписание на сегодня и ближайшие дни
+- Расписание на сегодня и ближайшие дни
 
-\- Добавление услуг (название, длительность, цена)
+- Добавление услуг (название, длительность, цена)
 
-\- Управление услугами: скрыть, показать, удалить
+- Управление услугами: скрыть, показать, удалить
 
-\- Настройка часов работы
+- Настройка часов работы
 
-\- Уведомления о новых записях и отменах
+- Уведомления о новых записях и отменах
 
-\- Экспорт клиентов в CSV (команда /export) — открывается в Excel
-
-
-
-\### Стек технологий
+- Экспорт клиентов в CSV (команда /export) — открывается в Excel
 
 
 
-\- Python 3.12
-
-\- aiogram 3.x — Telegram Bot API
-
-\- SQLAlchemy 2.0 + aiosqlite — база данных SQLite
-
-\- APScheduler — планировщик напоминаний
-
-\- pydantic-settings — конфигурация через .env
-
-\- Docker + docker-compose — для деплоя
+### Стек технологий
 
 
 
-\### Быстрый старт
+- Python 3.12
+
+- aiogram 3.x — Telegram Bot API
+
+- SQLAlchemy 2.0 + aiosqlite — база данных SQLite
+
+- APScheduler — планировщик напоминаний
+
+- pydantic-settings — конфигурация через .env
+
+- Docker + docker-compose — для деплоя
 
 
 
-1\. Клонировать репозиторий:
+### Быстрый старт
+
+
+
+1. Клонировать репозиторий:
 
 
 
@@ -100,41 +100,39 @@ TG Booking Bot — лёгкий Telegram-бот для мастеров сфер
 
 
 
-2\. Создать бота через @BotFather и получить BOT\_TOKEN.
+2. Создать бота через @BotFather и получить BOT_TOKEN.
 
-&#x20;  Свой MASTER\_TG\_ID узнать через @userinfobot.
-
-
-
-3\. Создать .env по образцу .env.example:
+&#x20;  Свой MASTER_TG_ID узнать через @userinfobot.
 
 
 
-&#x20;  BOT\_TOKEN=123456:ABC-DEF...
+3. Создать .env по образцу .env.example:
 
-&#x20;  MASTER\_TG\_ID=123456789
+
+
+&#x20;  BOT_TOKEN=123456:ABC-DEF...
+
+&#x20;  MASTER_TG_ID=123456789
 
 &#x20;  TZ=Europe/Moscow
 
-&#x20;  DB\_URL=sqlite+aiosqlite:///./data/bot.db
+&#x20;  DB_URL=sqlite+aiosqlite:///./data/bot.db
 
 
 
-4\. Установить зависимости:
+4. Установить зависимости:
 
 
 
 &#x20;  python -m venv .venv
 
-&#x20;  source .venv/bin/activate     (Linux/macOS)
-
-&#x20;  .venv\\Scripts\\activate        (Windows)
+&#x20;  source .venv/bin/activate
 
 &#x20;  pip install -r requirements.txt
 
 
 
-5\. Запустить:
+5. Запустить:
 
 
 
@@ -142,7 +140,7 @@ TG Booking Bot — лёгкий Telegram-бот для мастеров сфер
 
 
 
-\### Деплой на VPS
+### Деплой на VPS
 
 
 
@@ -166,43 +164,43 @@ TG Booking Bot — лёгкий Telegram-бот для мастеров сфер
 
 
 
-\### Структура проекта
+### Структура проекта
 
 
 
-tg-booking-bot/
+&#x20;  tg-booking-bot/
 
-\- app/
+&#x20;  app/
 
-&#x20; - main.py                 точка входа
+&#x20;    main.py                 точка входа
 
-&#x20; - config.py               настройки из .env
+&#x20;    config.py               настройки из .env
 
-&#x20; - states.py               FSM-состояния
+&#x20;    states.py               FSM-состояния
 
-&#x20; - database/               SQLAlchemy: engine, models, repo
+&#x20;    database/               SQLAlchemy: engine, models, repo
 
-&#x20; - handlers/               обработчики: common, client, master
+&#x20;    handlers/               обработчики: common, client, master
 
-&#x20; - keyboards/              клавиатуры
+&#x20;    keyboards/              клавиатуры
 
-&#x20; - services/               бизнес-логика: slots, scheduler
+&#x20;    services/               бизнес-логика: slots, scheduler
 
-&#x20; - middlewares/            middleware для сессии БД
+&#x20;    middlewares/            middleware для сессии БД
 
-\- data/                     SQLite-база (не в git)
+&#x20;  data/                     SQLite-база (не в git)
 
-\- Dockerfile
+&#x20;  Dockerfile
 
-\- docker-compose.yml
+&#x20;  docker-compose.yml
 
-\- requirements.txt
+&#x20;  requirements.txt
 
-\- .env.example
+&#x20;  .env.example
 
 
 
-\### Лицензия
+### Лицензия
 
 
 
@@ -210,15 +208,15 @@ MIT
 
 
 
-\---
+---
 
 
 
-\## English
+## English
 
 
 
-\### About
+### About
 
 
 
@@ -232,59 +230,59 @@ No website, no app install — everything works inside Telegram.
 
 
 
-\### Features
+### Features
 
 
 
 For clients:
 
-\- Booking flow: service, date, time, confirmation
+- Booking flow: service, date, time, confirmation
 
-\- View and cancel own bookings
+- View and cancel own bookings
 
-\- Reminders 24 hours and 2 hours before the visit
+- Reminders 24 hours and 2 hours before the visit
 
 
 
 For the master:
 
-\- Schedule for today and upcoming days
+- Schedule for today and upcoming days
 
-\- Add services (name, duration, price)
+- Add services (name, duration, price)
 
-\- Manage services: hide, show, delete
+- Manage services: hide, show, delete
 
-\- Configure working hours
+- Configure working hours
 
-\- Notifications on new bookings and cancellations
+- Notifications on new bookings and cancellations
 
-\- Export clients to CSV (command /export) — opens in Excel
-
-
-
-\### Tech Stack
+- Export clients to CSV (command /export) — opens in Excel
 
 
 
-\- Python 3.12
-
-\- aiogram 3.x — Telegram Bot API
-
-\- SQLAlchemy 2.0 + aiosqlite — SQLite database
-
-\- APScheduler — reminder scheduler
-
-\- pydantic-settings — .env configuration
-
-\- Docker + docker-compose — deployment
+### Tech Stack
 
 
 
-\### Quick Start
+- Python 3.12
+
+- aiogram 3.x — Telegram Bot API
+
+- SQLAlchemy 2.0 + aiosqlite — SQLite database
+
+- APScheduler — reminder scheduler
+
+- pydantic-settings — .env configuration
+
+- Docker + docker-compose — deployment
 
 
 
-1\. Clone:
+### Quick Start
+
+
+
+1. Clone:
 
 
 
@@ -294,41 +292,39 @@ For the master:
 
 
 
-2\. Create a bot via @BotFather and get BOT\_TOKEN.
+2. Create a bot via @BotFather and get BOT_TOKEN.
 
-&#x20;  Find your MASTER\_TG\_ID via @userinfobot.
-
-
-
-3\. Create .env from .env.example:
+&#x20;  Find your MASTER_TG_ID via @userinfobot.
 
 
 
-&#x20;  BOT\_TOKEN=123456:ABC-DEF...
+3. Create .env from .env.example:
 
-&#x20;  MASTER\_TG\_ID=123456789
+
+
+&#x20;  BOT_TOKEN=123456:ABC-DEF...
+
+&#x20;  MASTER_TG_ID=123456789
 
 &#x20;  TZ=Europe/Moscow
 
-&#x20;  DB\_URL=sqlite+aiosqlite:///./data/bot.db
+&#x20;  DB_URL=sqlite+aiosqlite:///./data/bot.db
 
 
 
-4\. Install dependencies:
+4. Install dependencies:
 
 
 
 &#x20;  python -m venv .venv
 
-&#x20;  source .venv/bin/activate     (Linux/macOS)
-
-&#x20;  .venv\\Scripts\\activate        (Windows)
+&#x20;  source .venv/bin/activate
 
 &#x20;  pip install -r requirements.txt
 
 
 
-5\. Run:
+5. Run:
 
 
 
@@ -336,7 +332,7 @@ For the master:
 
 
 
-\### Deploy to VPS
+### Deploy to VPS
 
 
 
@@ -344,7 +340,7 @@ See DEPLOY.md for the full Docker guide.
 
 
 
-\### License
+### License
 
 
 
@@ -352,13 +348,13 @@ MIT
 
 
 
-\---
+---
 
 
 
-\## Author / Автор
+## Author / Автор
 
 
 
-Ivan Timonin — \[@ivan-timonin](https://github.com/ivan-timonin)
+Ivan Timonin — [@ivan-timonin](https://github.com/ivan-timonin)
 
